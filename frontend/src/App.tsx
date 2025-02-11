@@ -4,8 +4,6 @@ import './styles/App.css';
 
 
 function App() {
-  const [resultText, setResultText] = useState("Please enter your name below 👇");
-  const [name, setName] = useState('');
   const [sidebarWidth, setSidebarWidth] = useState(250);
   const [isResizing, setIsResizing] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -15,13 +13,6 @@ function App() {
   // Refs to store initial mouse position and sidebar width at drag start.
   const initialXRef = useRef(0);
   const initialWidthRef = useRef(sidebarWidth);
-
-  const updateName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
-  const updateResultText = (result: string) => setResultText(result);
-
-  function greet() {
-    Greet(name).then(updateResultText);
-  }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault(); // Prevent text selection
