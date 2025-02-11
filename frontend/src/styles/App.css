@@ -1,39 +1,154 @@
+/* Overall container */
 .app-container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .sidebar {
-    width: 250px;  /* Adjust as needed */
-    background-color: #1e1c20;
-    border-right: 1px solid #444444;
-    padding: 1rem;
-    overflow-y: auto;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidebar li {
-    margin-bottom: 1rem;
-    cursor: pointer;
-  }
-  
-  .content-area {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-  }
-  
-  .header {
-    margin-bottom: 2rem;
-  }
-  
-  .result {
-    margin-bottom: 1rem;
-  }
-  
-  
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+  background-color: #141118;
+  padding: 1rem;
+  overflow: auto;
+  position: relative;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.toggle-button {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.resizer {
+  width: 2px;
+  cursor: ew-resize;
+  background-color: #5c5b5b;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Main content area */
+.content-area {
+  flex: 1;
+  padding: 2rem;
+  overflow: auto;
+  position: relative;
+}
+
+/* header styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+/* slider toggle styles */
+.view-toggle {
+  display: flex;
+  align-items: center;
+}
+
+/* switch / the toggle container */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-right: 0.5rem;
+}
+
+/* hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* interface slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* When the checkbox is checked */
+.switch input:checked + .slider {
+  background-color: #e03e7c;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Optional label styling for the toggle */
+.toggle-label {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Viewport container */
+.viewport {
+  margin-bottom: 2rem;
+}
+
+/* Placeholder */
+.markdown-view,
+.graphical-view {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
+.header img {
+  max-height: 40px;
+}
+
+.result {
+  margin-bottom: 1rem;
+}
+
+.input-box {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+}

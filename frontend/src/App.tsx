@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from './assets/images/logo-universal.png';
 import './styles/App.css';
-import { Greet } from '../wailsjs/go/main/App';
+
 
 function App() {
   const [resultText, setResultText] = useState("Please enter your name below 👇");
@@ -9,8 +9,10 @@ function App() {
   const [sidebarWidth, setSidebarWidth] = useState(250);
   const [isResizing, setIsResizing] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  // New state to toggle between viewports: 'markdown' or 'graphical'
+  const [viewMode, setViewMode] = useState<'markdown' | 'graphical'>('markdown');
 
-  // Refs to store the initial mouse X position and sidebar width at the start of a drag
+  // Refs to store initial mouse position and sidebar width at drag start.
   const initialXRef = useRef(0);
   const initialWidthRef = useRef(sidebarWidth);
 
@@ -22,23 +24,19 @@ function App() {
   }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault(); // Prevents text selection and other default behaviors
-    // If the sidebar is collapsed, expand it on drag start.
+    e.preventDefault(); // Prevent text selection
     if (isCollapsed) {
       setIsCollapsed(false);
     }
     setIsResizing(true);
-    // Store the initial values for the drag calculation.
     initialXRef.current = e.clientX;
     initialWidthRef.current = sidebarWidth;
   };
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isResizing) return;
-    // Calculate the change in the X position.
     const dx = e.clientX - initialXRef.current;
     let newWidth = initialWidthRef.current + dx;
-    // Define minimum and maximum sidebar widths.
     const minWidth = 50;
     const maxWidth = 500;
     if (newWidth < minWidth) newWidth = minWidth;
@@ -49,26 +47,22 @@ function App() {
   const handleMouseUp = () => {
     if (isResizing) {
       setIsResizing(false);
-      // Optionally collapse if the sidebar is dragged to nearly the minimum width.
       if (sidebarWidth <= 60) {
         setIsCollapsed(true);
       }
     }
   };
 
-  // Add global mouse event listeners when resizing is active.
   useEffect(() => {
     if (isResizing) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
-      // Disable text selection during the drag.
       document.body.style.userSelect = 'none';
     } else {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
       document.body.style.userSelect = 'auto';
     }
-    // Cleanup in case the component unmounts.
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
@@ -76,7 +70,6 @@ function App() {
     };
   }, [isResizing, sidebarWidth]);
 
-  // If the sidebar is collapsed, force its width to a small fixed value.
   const sidebarStyle = {
     width: isCollapsed ? '50px' : `${sidebarWidth}px`
   };
@@ -89,16 +82,14 @@ function App() {
           <li>Home</li>
           <li>Notes</li>
           <li>Projects</li>
-          <li>Settings</li>
+          <li>Options</li>
         </ul>
-        {/* Toggle button to collapse/expand the sidebar */}
         <button
           className="toggle-button"
           onClick={() => setIsCollapsed(prev => !prev)}
         >
           {isCollapsed ? 'Expand' : 'Collapse'}
         </button>
-        {/* Draggable resizer handle on the right edge */}
         <div className="resizer" onMouseDown={handleMouseDown} />
       </nav>
 
@@ -106,22 +97,36 @@ function App() {
       <main className="content-area">
         <div className="header">
           <img src={logo} id="logo" alt="logo" />
+          {/* slider-style toggle for switching viewports */}
+          <div className="view-toggle">
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={viewMode === 'graphical'}
+                onChange={() =>
+                  setViewMode(viewMode === 'markdown' ? 'graphical' : 'markdown')
+                }
+              />
+              <span className="slider"></span>
+            </label>
+            <span className="toggle-label">
+              {viewMode === 'markdown' ? 'Markdown' : 'Graphical'}
+            </span>
+          </div>
         </div>
-        <div id="result" className="result">
-          {resultText}
-        </div>
-        <div id="input" className="input-box">
-          <input
-            id="name"
-            className="input"
-            onChange={updateName}
-            autoComplete="off"
-            name="input"
-            type="text"
-          />
-          <button className="btn" onClick={greet}>
-            Greet
-          </button>
+        {/* conditionally render the viewport based on the selected mode */}
+        <div className="viewport">
+          {viewMode === 'markdown' ? (
+            <div className="markdown-view">
+              <p>This is the Markdown Viewer.</p>
+              {/* replace with md viewer component */}
+            </div>
+          ) : (
+            <div className="graphical-view">
+              <p>This is the Graphical Viewer.</p>
+              {/* replace with graphical view component */}
+            </div>
+          )}
         </div>
       </main>
     </div>
