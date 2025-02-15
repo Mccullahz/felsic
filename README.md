@@ -1,7 +1,7 @@
 # README
 
 ## About
-
+Editing this for the sake of first test commit
 This is the official Wails React-TS template.
 
 You can configure the project by editing `wails.json`. More information about the project settings can be found
