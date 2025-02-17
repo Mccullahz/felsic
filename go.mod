@@ -2,11 +2,9 @@ module felsic-req
 
 go 1.21
 
-toolchain go1.23.3
-
 require (
 	github.com/google/go-github v17.0.0+incompatible
-	github.com/wailsapp/wails/v2 v2.9.2
+	github.com/wailsapp/wails/v2 v2.8.2
 )
 
 require (
