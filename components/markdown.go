@@ -60,7 +60,7 @@ func ConvertMarkdownToHTML(markdown string) string {
 	return buffer.String()
 }
 
-// find instances of ** ** and wraps them in <strong> tags.
+// for bold text
 func processBold(input string) string {
 	boldRegex := regexp.MustCompile(`\*\*(.*?)\*\*`)
 	return boldRegex.ReplaceAllString(input, "<strong>$1</strong>")
