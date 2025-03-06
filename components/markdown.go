@@ -22,7 +22,7 @@ func ConvertMarkdownToHTML(markdown string) string {
 			}
 			continue
 		}
-
+		// for headers
 		if strings.HasPrefix(trimmed, "#") {
 			level := 0
 			for i := 0; i < len(trimmed) && trimmed[i] == '#'; i++ {
@@ -32,7 +32,7 @@ func ConvertMarkdownToHTML(markdown string) string {
 			buffer.WriteString(fmt.Sprintf("<h%d>%s</h%d>\n", level, content, level))
 			continue
 		}
-
+		// for lists
 		if strings.HasPrefix(trimmed, "- ") {
 			if !inList {
 				buffer.WriteString("<ul>\n")
