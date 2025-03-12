@@ -19,7 +19,7 @@ type Config struct {
 var appConfig Config
 
 // read and return the configuration from the config.json file
-func getConfig() Config {
+func GetConfig() Config {
 	var cfg Config
 
 	file, err := os.ReadFile("config/config.json")

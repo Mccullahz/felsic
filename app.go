@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	//"felsic-req/config" //also borked
+	"felsic-req/config"
 )
 
 // App struct
@@ -13,10 +13,10 @@ type App struct {
 // NewApp creates a new App application struct
 func NewApp() *App {
 	// these are borked, should ensure config is loaded before wails app starts
-	//cfg, err:= config.getConfig()
-	//log.Println("Config loaded, database: ", config.appConfig.Database.URI)
+	cfg, err:= config.GetConfig()
+	log.Println("Config loaded, database: ", config.appConfig.Database.URI)
 
-	return &App{}
+	return &App{Config: cfg}
 }
 
 // startup is called when the app starts. The context is saved
