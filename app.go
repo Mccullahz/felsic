@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"context"
 	"felsic-req/config"
 )
@@ -12,11 +13,11 @@ type App struct {
 
 // NewApp creates a new App application struct
 func NewApp() *App {
-	// these are borked, should ensure config is loaded before wails app starts
-	cfg, err:= config.GetConfig()
-	log.Println("Config loaded, database: ", config.appConfig.Database.URI)
-
-	return &App{Config: cfg}
+	// should ensure config is loaded before wails app starts
+	cfg:= config.GetConfig()
+		log.Println("Config loaded, database: ", cfg.Database.URI)
+	
+	return &App{}
 }
 
 // startup is called when the app starts. The context is saved
