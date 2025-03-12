@@ -1,0 +1,10 @@
+{
+	"database": {
+		"uri": "mongodb://localhost:27017",
+		"name": "mydb"
+	},
+	"server": {
+		"port": 5173
+	}
+}
+
