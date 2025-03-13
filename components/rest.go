@@ -4,7 +4,7 @@ package components
 import (
 	"context"
 	"log"
-	"time"
+	// "time" // not currently using time, but will need for future development
 
 	// TODO: these two must be installed via go, add to setup script
 	"go.mongodb.org/mongo-driver/mongo"
