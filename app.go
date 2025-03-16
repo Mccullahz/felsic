@@ -13,7 +13,7 @@ type App struct {
 
 // NewApp creates a new App application struct
 func NewApp() *App {
-	// should ensure config is loaded before wails app starts
+	// should ensure config is loaded before wails app starts, this is stopping the app from starting right now
 	cfg:= config.GetConfig()
 		log.Println("Config loaded, database: ", cfg.Database.URI)
 	
