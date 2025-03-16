@@ -14,6 +14,13 @@ type Config struct {
 	Server struct {
 		Port int `json:"port"`
 	} `json:"server"`
+	// very very very poor auth, PLEASE DO NOT FILL OUT GITHUB PAT!!!
+	GitHub struct {
+		RepoURL string `json:"repo_url"`
+		Branch string `json:"branch"`
+		Username string `json:"username"`
+		Token string `json:"token"`
+	} `json:"github"`
 }
 
 var appConfig Config
