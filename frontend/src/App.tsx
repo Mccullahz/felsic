@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from './assets/images/logo-universal.png';
 import './styles/App.css';
-
+import options from './options';
 
 function App() {
   const [sidebarWidth, setSidebarWidth] = useState(250);
   const [isResizing, setIsResizing] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  // New state to toggle between viewports: 'markdown' or 'graphical'
+  // new state to toggle between viewports: 'markdown' or 'graphical'
   const [viewMode, setViewMode] = useState<'markdown' | 'graphical'>('markdown');
 
-  // Refs to store initial mouse position and sidebar width at drag start.
+  // refs to store initial mouse position and sidebar width at drag start.
   const initialXRef = useRef(0);
   const initialWidthRef = useRef(sidebarWidth);
 
@@ -70,10 +70,10 @@ function App() {
       {/* SIDEBAR */}
       <nav className="sidebar" style={sidebarStyle}>
         <ul>
-          <li>Home</li>
-          <li>Notes</li>
-          <li>Projects</li>
-          <li>Options</li>
+          <li onClick={() => setActiveTab("Home")}>Home</li>
+          <li onClick={() => setActiveTab("Notes")}>Notes</li>
+          <li onClick={() => setActiveTab("Projects")}>Projects</li>
+          <li onClick={() => setActiveTab("Options")}>Options</li>
         </ul>
         <button
           className="toggle-button"
@@ -86,42 +86,50 @@ function App() {
 
       {/* MAIN CONTENT */}
       <main className="content-area">
-        <div className="header">
-          <img src={logo} id="logo" alt="logo" />
-          {/* slider-style toggle for switching viewports */}
-          <div className="view-toggle">
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={viewMode === 'graphical'}
-                onChange={() =>
-                  setViewMode(viewMode === 'markdown' ? 'graphical' : 'markdown')
-                }
-              />
-              <span className="slider"></span>
-            </label>
-            <span className="toggle-label">
-              {viewMode === 'markdown' ? 'Markdown' : 'Graphical'}
-            </span>
-          </div>
-        </div>
-        {/* conditionally render the viewport based on the selected mode */}
-        <div className="viewport">
-          {viewMode === 'markdown' ? (
-            <div className="markdown-view">
-              <p>This is the Markdown Viewer.</p>
-              {/* replace with md viewer component */}
+        {activeView === "options" ? (
+          <OptionsMenu /> // render xxxx when selected
+        ) : (
+          <>
+            <div className="header">
+              <img src={logo} id="logo" alt="logo" />
+
+              {/* slider toggle */}
+              <div className="view-toggle">
+                <label className="switch">
+                  <input
+                    type="checkbox"
+                    checked={viewMode === "graphical"}
+                    onChange={() =>
+                      setViewMode(viewMode === "markdown" ? "graphical" : "markdown")
+                    }
+                  />
+                  <span className="slider"></span>
+                </label>
+                <span className="toggle-label">
+                  {viewMode === "markdown" ? "Markdown" : "Graphical"}
+                </span>
+              </div>
             </div>
-          ) : (
-            <div className="graphical-view">
-              <p>This is the Graphical Viewer.</p>
-              {/* replace with graphical view component */}
+
+            {/* render the viewport */}
+            <div className="viewport">
+              {viewMode === "markdown" ? (
+                <div className="markdown-view">
+                  <p>This is the Markdown Viewer.</p>
+                  {/* md viewer component */}
+                </div>
+              ) : (
+                <div className="graphical-view">
+                  <p>This is the Graphical Viewer.</p>
+                  {/* graphical view component */}
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          </>
+        )}
       </main>
     </div>
   );
-}
+};
 
 export default App;

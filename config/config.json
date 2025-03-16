@@ -8,7 +8,7 @@
 	},
 	"github": {
 		"repo_url": "https://github.com/user/repository.git",
-		"branch": "main"
+		"branch": "main",
 		"username": "user",
 		"token": "token"
 	}
