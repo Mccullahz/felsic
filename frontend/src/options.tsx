@@ -1,5 +1,5 @@
 import React from "react";
-
+// currently nothing happening here, no submission of data
 const Options: React.FC = () => {
   return (
     <div className="options-menu">
@@ -16,6 +16,7 @@ const Options: React.FC = () => {
         <label>MongoDB URI:</label>
         <input type="text" placeholder="Enter MongoDB connection string" />
       </div>
+      ({/* TODO: setup save such that it sends to conf.json*/})
       <button>Save Settings</button>
     </div>
   );
