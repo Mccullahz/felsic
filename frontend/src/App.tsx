@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from './assets/images/logo-universal.png';
 import './styles/App.css';
-import options from './options';
+import Options from './options';
 
 function App() {
   const [sidebarWidth, setSidebarWidth] = useState(250);
   const [isResizing, setIsResizing] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   // new state to toggle between viewports: 'markdown' or 'graphical'
-  const [viewMode, setViewMode] = useState<'markdown' | 'graphical'>('markdown');
+  const [viewMode, setViewMode] = useState<'markdown' | 'graphical' | 'options'>('markdown');
 
   // refs to store initial mouse position and sidebar width at drag start.
   const initialXRef = useRef(0);
@@ -70,10 +70,10 @@ function App() {
       {/* SIDEBAR */}
       <nav className="sidebar" style={sidebarStyle}>
         <ul>
-          <li onClick={() => setActiveTab("Home")}>Home</li>
-          <li onClick={() => setActiveTab("Notes")}>Notes</li>
-          <li onClick={() => setActiveTab("Projects")}>Projects</li>
-          <li onClick={() => setActiveTab("Options")}>Options</li>
+          <li onClick ={() => setViewMode("markdown")}>Home</li>
+          <li>Notes</li>
+          <li>Projects</li>
+          <li onClick={() => setViewMode("options")}>Options</li>
         </ul>
         <button
           className="toggle-button"
@@ -86,8 +86,8 @@ function App() {
 
       {/* MAIN CONTENT */}
       <main className="content-area">
-        {activeView === "options" ? (
-          <OptionsMenu /> // render xxxx when selected
+        {viewMode === "options" ? (
+          <Options/> // render xxxx when selected
         ) : (
           <>
             <div className="header">
