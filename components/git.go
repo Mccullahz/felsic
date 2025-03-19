@@ -39,7 +39,7 @@ func push(repoPath, username, token string) error {
 	}
 
 	// commit changes
-	commitMsg := "Updated repository files"
+	commitMsg := "Felsic updated repository files"
 	_, err = w.Commit(commitMsg, &git.CommitOptions{
 		Author: &object.Signature{
 			Name:  username,
@@ -67,3 +67,27 @@ func push(repoPath, username, token string) error {
 	return nil
 }
 
+// pulls the latest changes from GitHub
+func pull(repoPath, username, token string) error {
+	// read existing repo
+	repo, err := git.PlainOpen(repoPath)
+	if err != nil {
+		return err
+	}
+
+	// pull from GitHub
+	auth := &http.BasicAuth{
+		Username: username, // GitHub username (not used, but required)
+		Password: token,    // GitHub personal access token
+	}
+
+	err = repo.Fetch(&git.FetchOptions{
+		Auth: auth,
+	})
+	if err != nil {
+		return err
+	}
+
+	log.Println("Changes successfully pulled from GitHub")
+	return nil
+}

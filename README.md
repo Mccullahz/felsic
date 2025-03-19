@@ -8,7 +8,7 @@ Felsic's goal is to become a serverside application designed to provide a *** no
 
 ## Features
 
-- Personal note-taking functionality
+- Personal and server-side note-taking functionality
 - Optional Cross-Platform Desktop application with native performance
 - *Modern* React TypeScript UI
 
