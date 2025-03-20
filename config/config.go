@@ -14,7 +14,7 @@ type Config struct {
 	Server struct {
 		Port int `json:"port"`
 	} `json:"server"`
-	// very very very poor auth, PLEASE DO NOT FILL OUT GITHUB PAT!!!
+	// very very very poor auth, PLEASE DO NOT FILL OUT GITHUB PAT!!! WILL BE SAVED IN PLAIN TEXT!!!
 	GitHub struct {
 		RepoURL string `json:"repo_url"`
 		Branch string `json:"branch"`
