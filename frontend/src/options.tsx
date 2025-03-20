@@ -17,7 +17,7 @@ const Options: React.FC = () => {
         <input type="text" placeholder="Enter MongoDB connection string" />
       </div>
       ({/* TODO: setup save such that it sends to conf.json*/})
-      <button onClick = {() => {alert("Settings saved!")}}>Save</button>
+      <button onClick = {() => {alert("Settings saved!")}}>Save Settings</button>
     </div>
   );
 };
