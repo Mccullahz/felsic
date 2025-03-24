@@ -6,7 +6,6 @@ import (
 	"log"
 	// "time" // not currently using time, but will need for future development
 
-	// TODO: these two must be installed via go, add to setup script
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
