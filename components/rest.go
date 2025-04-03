@@ -14,6 +14,7 @@ var collection *mongo.Collection
 
 func connectMongo() {
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017") // adjust based on db.... Will setup a config file in the future to handle optioned vars
+	// this shpuld be setup well enough to ship for now
 	client, err := mongo.Connect(context.TODO(), clientOptions) 
 	if err != nil {
 		log.Fatal(err)
